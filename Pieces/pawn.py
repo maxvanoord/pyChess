@@ -11,18 +11,20 @@ class Pawn:
         moves = []
         if self.color == "white":
             if self.row < len(board) - 1:
-                if board[self.row + 1][self.col] == 0:
+                if board[self.row + 1][self.col] is None:
                     moves.append((self.row + 1, self.col))
             if self.firstMove:
-                if board[self.row + 2][self.col] == 0:
+                if board[self.row + 2][self.col] is None:
                     moves.append((self.row + 2, self.col))
         elif self.color == "black":
             if self.row > 0:
-                if board[self.row - 1][self.col] == 0:
+                if board[self.row - 1][self.col] is None:
                     moves.append((self.row - 1, self.col))
             if self.firstMove:
-                if board[self.row - 2][self.col] == 0:
+                if board[self.row - 2][self.col] is None:
                     moves.append((self.row - 2, self.col))
+
+        return moves
 
     def strikes(self, board):
         strikes = []
@@ -37,3 +39,5 @@ class Pawn:
                     strikes.append((self.row + 1, self.col + 1))
                 if type(board[self.row][self.col + 1]) == Pawn and board[self.row][self.col + 1].justTwoStepped:
                     strikes.append((self.row, self.col + 1))
+
+        return strikes
